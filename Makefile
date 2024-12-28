@@ -6,6 +6,7 @@ SRCDIR = src
 SRC = $(wildcard $(SRCDIR)/*.c)
 TESTDIR = tests
 TESTSRC = $(wildcard $(TESTDIR)/*.c)
+TESTBIN = bin_tests
 
 test-equal:
-	$(CC) $(CFLAGS)$(INCLUDES) $(SRC) tests/equal_test.c -o ./tests/equal
+	$(CC) $(CFLAGS)$(INCLUDES) $(SRC) $(TESTDIR)/equal_test.c -o $(TESTBIN)/equal
