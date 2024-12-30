@@ -18,7 +18,6 @@ CSuite* setup_csuite() {
 TestCase* create_testcase(char* name, TestCaseFn* fn)
 {
   char* nameVal = name;
-  // TODO: Check if testcase_name is valid
   while(*nameVal++)
   {
 
@@ -87,6 +86,7 @@ void run_only(CSuite *csuite, char* testcase_name)
   if(!this_testcase)
   {
     fprintf(stderr, "[!] CSuite has no testcase %s ", testcase_name);
+    fail_print();
     exit(EXIT_FAILURE);
   }
   this_testcase();
@@ -108,26 +108,4 @@ bool Char_equal(char a, char b){
 }
 
 
-void equal(void* a, void* b, Type t)
-{
-  bool passed;
-  switch (t) {
-    case Int:
-      passed =  Int_equal((*(int*)a), (*(int*)b));
-      break;
-    case Char:
-      passed = Char_equal((*(char*)a), (*(char*)b));
-      break;
-    default:
-      fprintf(stderr, "[!] Unexpected type ");
-      exit(EXIT_FAILURE);
-  }
-
-  if(!passed) 
-  {
-    printf("--- FAIL\t\n");
-    return ;
-  }
-  printf("--- PASS\t\n" );
-}
 
