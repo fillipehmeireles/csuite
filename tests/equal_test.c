@@ -4,40 +4,34 @@
 #include <stdio.h>
 
 
-bool INT_equal_test() {
+void INT_equal_test() {
   int a = 1;
   int b = 1;
-  TYPE t = INT;
-  if(!equal((void *) &a,(void *) &b,t))
-  {
-    // TODO: LOG Expected x Current
-    printf("fail\n");
-    return false;
-  }
+  Type t = Int;
 
-  printf("pass\n");
-  return true;
+  equal((void *) &a,(void *) &b,t);
 }
 
-bool CHAR_equal_test()
+void CHAR_equal_test()
 {
   char a = 'a';
   char b = 'b';
-  TYPE t = CHAR;
-
-  if(!equal((void *) &a,(void *) &b,t))
-  {
-    // TODO: LOG Expected x Current
-    printf("fail");
-    return false;
-  }
-
-  printf("pass\n");
-  return true;
-
+  Type t = Char;
+  equal((void *) &a,(void *) &b,t);
 }
+
 int main()
 {
-  INT_equal_test();
-  CHAR_equal_test();
+
+  CSuite* csuite = setup_csuite();
+  add_testcase(csuite,"int_equal_test",&INT_equal_test); 
+  add_testcase(csuite,"char_equal_test",&CHAR_equal_test); 
+
+  // Run all test cases
+  run(csuite);
+
+
+  // Run individual test
+  run_only(csuite, "int_equal_test");
+
 }
